@@ -16,7 +16,7 @@ maven {
 - [ ] Native (`common-native`)
 - [ ] Multiplatform (`common`) 
 
-Multiplatform fails build because of an issue i'm actively trying to fix, check back later for additional information.
+Multiplatform fails publish (and thus does native and nodeJS because it runs alphabetically) because of an issue i'm actively trying to fix, check back later for additional information.
 
 
 **DOCS COMING SOON**
