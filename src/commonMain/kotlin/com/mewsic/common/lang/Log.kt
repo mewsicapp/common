@@ -1,5 +1,10 @@
 package com.mewsic.common.lang
 
+/**
+ * Log class polyfill, based on the Android implementation.
+ * @constructor Creates a new Log object from a [String] tag
+ * @param tag The tag to use for the log
+ */
 expect class Log(tag: String) {
     var tag: String
 

@@ -1,3 +1,7 @@
+import org.jetbrains.kotlin.konan.properties.hasProperty
+import java.io.File
+import java.io.FileInputStream
+import java.util.*
 plugins {
     kotlin("multiplatform") version "1.7.0"
     id("com.android.library") version "7.0.3"
@@ -9,7 +13,9 @@ plugins {
 
 group = "com.mewsic"
 version = "1.0-SNAPSHOT"
-
+val prop = Properties().apply {
+    load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+}
 repositories {
     google()
     jcenter()
@@ -49,7 +55,7 @@ kotlin {
         else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
     }
 
-    
+
     android()
     js("node", IR) {
         binaries.executable()
@@ -147,5 +153,26 @@ android {
 kotlin.targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java) {
     binaries.all {
         binaryOptions["memoryModel"] = "experimental"
+    }
+}
+
+if (prop.hasProperty("mavenToken")) {
+    // push to maven repo
+    publishing {
+        repositories {
+            maven {
+                name = "Host"
+                url = uri("https://maven.martmists.com/releases")
+                credentials {
+                    username = "mewsic"
+                    password = prop.getProperty("mavenToken")
+                }
+            }
+        }
+    }
+}
+tasks {
+    named("publish") {
+        dependsOn("build")
     }
 }
