@@ -2,21 +2,23 @@
 
 Accessible via the Martmists maven server 
 ```kt
+// repos
 maven {
     url = uri("https://maven.martmists.com/releases")
 }
+// dependencies
+implementation("com.mewsic.common:1.0-SNAPSHOT")
 ```
 
 ## Published Builds
 - [x] Android (`common-android`)
 - [x] Android Debug (`common-android-debug`)
-- [x] Chrome (BrowserJS) (`common-chrome`)
 - [x] JVM (`common-jvm`)
-- [ ] NodeJS (`common-node`)
-- [ ] Native (`common-native`)
-- [ ] Multiplatform (`common`) 
+- [x] JS (`common-js`)
+- [x] Native (`common-native`)
+- [x] Multiplatform (`common`) 
 
-Multiplatform fails publish (and thus does native and nodeJS because it runs alphabetically) because of an issue i'm actively trying to fix, check back later for additional information.
+
 
 
 **DOCS COMING SOON**

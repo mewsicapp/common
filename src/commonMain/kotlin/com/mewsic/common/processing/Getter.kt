@@ -11,7 +11,7 @@ class Getter<T>  constructor(
     private val getter: () -> T
 ) {
     /**
-     * @return The value returned from [getter]
+     * @return  The value returned from [getter]
      */
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T = getter()
 }

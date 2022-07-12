@@ -31,19 +31,15 @@ repositories {
 }
 
 kotlin {
+    android {
+        publishLibraryVariants("release", "debug")
+    }
     jvm {
         compilations.all {
             kotlinOptions.jvmTarget = "1.8"
         }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
-        }
-    }
-    js("chrome", BOTH) {
-        browser {
-            commonWebpackConfig {
-                cssSupport.enabled = true
-            }
         }
     }
     val hostOs = System.getProperty("os.name")
@@ -57,9 +53,12 @@ kotlin {
 
 
     android()
-    js("node", IR) {
-        binaries.executable()
+    js("js", IR) {
+        binaries.library()
         nodejs {
+
+        }
+        browser {
 
         }
     }
@@ -86,13 +85,7 @@ kotlin {
 
         }
         val jvmTest by getting
-        val chromeMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-client-js:$ktorVersion")
-                implementation(npm("@js-joda/timezone", "2.3.0"))
-            }
-        }
-        val chromeTest by getting
+
         val nativeMain by getting {
             dependencies {
                 if (hostOs == "Mac OS X") {
@@ -114,7 +107,7 @@ kotlin {
                 implementation("junit:junit:4.13.2")
             }
         }
-        val nodeMain by getting {
+        val jsMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-nodejs:0.0.7")
                 implementation("io.ktor:ktor-client-js:$ktorVersion")
@@ -122,17 +115,8 @@ kotlin {
 
             }
         }
-        val nodeTest by getting
-        // soonTM
-//        val iosMain by creating {
-//            dependsOn(commonMain)
-//            iosX64Main.dependsOn(this)
-//            iosArm64Main.dependsOn(this)
-//            iosSimulatorArm64Main.dependsOn(this)
-//            dependencies {
-//                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-//            }
-//        }
+        val jsTest by getting
+
     }
 }
 
