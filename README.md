@@ -7,7 +7,7 @@ maven {
     url = uri("https://maven.martmists.com/releases")
 }
 // dependencies
-implementation("com.mewsic.common:1.0-SNAPSHOT")
+implementation("com.mewsic:common:1.0-SNAPSHOT")
 ```
 
 ## Published Builds
